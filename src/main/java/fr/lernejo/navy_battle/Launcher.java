@@ -1,8 +1,10 @@
 package fr.lernejo.navy_battle;
 
+import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import fr.lernejo.navy_battle.Server_infos;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -35,9 +37,19 @@ public class Launcher {
     private void Server_start(int port, String url) throws IOException, InterruptedException {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.setExecutor(Executors.newSingleThreadExecutor());
-        server.createContext("/ping", handler::Ping);
+        server.createContext("/ping", Launcher::Ping);
         server.start();
         Client client = new Client();
         client.Client_start(port, url);
+    }
+
+    public static void Ping(HttpExchange exchange) throws IOException {
+        String message = "OK";
+        exchange.sendResponseHeaders(200, message.length());
+        try (OutputStream os = exchange.getResponseBody())
+        {
+            os.write(message.getBytes());
+        }
+        exchange.close();
     }
 }
