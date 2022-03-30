@@ -15,7 +15,7 @@ public class Client {
                     .uri(URI.create(URL + "/api/game/start"))
                     .setHeader("Accept", "application/json")
                     .setHeader("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString("{\"id\":\"1\", \"url\":\"http://localhost:" + port + "\", \"message\":\"Can it work ?\"}"))
+                    .POST(HttpRequest.BodyPublishers.ofString("{\"id\":\"1\", \"url\":\"http://localhost:" + port + "\", \"message\":\"Salut\"}"))
                     .build();
             client.send(res, HttpResponse.BodyHandlers.ofString());
         }
