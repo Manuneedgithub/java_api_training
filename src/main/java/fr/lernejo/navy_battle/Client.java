@@ -7,7 +7,7 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
 
 public class Client {
-    public void Client_start(int port, String URL) throws IOException, InterruptedException {
+    public static void Client_start(int port, String URL) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder()
                 .build();
         if(URL != null) {
